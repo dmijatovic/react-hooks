@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import {Button, Container, InputArea, Label} from "../../helpers/Styled";
 
 const INCREMENT = 'increment';
@@ -6,10 +6,35 @@ const DECREMENT = 'decrement';
 const INPUT = 'INPUT';
 
 
-export const Exercise2 = () => {
-  const state = {}
-  const dispatch = () => {}
+const reducerEx2 = (state,action) =>{
+  switch(action.type){
+    case INCREMENT:
+      return {
+        ...state,
+        count: state.count + 1
+      }
+    case DECREMENT:
+      return {
+        ...state,
+        count: state.count - 1
+      }
+    case INPUT:
+      return {
+        ...state,
+        text: action.payload
+      }
+    default:
+      return state
+  }
+}
 
+
+export const Exercise2 = () => {
+  //const dispatch = () => {}
+  const [state,dispatch] = useReducer(reducerEx2,{
+    count:1,
+    text:"test"
+  })
   return (
     <Container>
       <p>{state.count}</p>
